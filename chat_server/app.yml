@@ -1,2 +1,12 @@
 server:
   port: 6688
+  db_url: "postgres://postgres:postgres@localhost:5432/chat"
+auth:
+  sk: |
+    -----BEGIN PRIVATE KEY-----
+    MC4CAQAwBQYDK2VwBCIEIHeoGkR9yEStemfNWPUT/PlSL2wpOjszYhD6xND40KqA
+    -----END PRIVATE KEY-----
+  pk: |
+    -----BEGIN PUBLIC KEY-----
+    MCowBQYDK2VwAyEArUbQxpiqLGvG5/tBb4Rd4KPF/D8/xaUQk3mC23ey3fk=
+    -----END PUBLIC KEY-----
