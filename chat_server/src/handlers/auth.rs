@@ -4,12 +4,7 @@ use crate::{
     AppState, User,
 };
 use anyhow::Result;
-use axum::{
-    extract::State,
-    http::{HeaderMap, HeaderValue, StatusCode},
-    response::IntoResponse,
-    Json,
-};
+use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -30,9 +25,7 @@ pub(crate) async fn signup_handler(
 
     let user = User::create(&input, &state.pool).await?;
     let token = state.ek.sign(user)?;
-    let mut header = HeaderMap::new();
-    header.insert("X-Token", HeaderValue::from_str(&token)?);
-    Ok((StatusCode::CREATED, header, Json(AuthOutput { token })).into_response())
+    Ok((StatusCode::CREATED, Json(AuthOutput { token })).into_response())
 }
 
 pub(crate) async fn signin_handler(
