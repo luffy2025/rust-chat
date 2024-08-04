@@ -55,7 +55,7 @@ mod tests {
     async fn signup_should_work() -> Result<()> {
         let config = AppConfig::load()?;
         let (_tdb, state) = AppState::new_for_test(config).await?;
-        let input = CreateUser::new("Monkey D. Luffy", "luffy@acme.org", "hunter42");
+        let input = CreateUser::new("none", "Monkey D. Luffy", "luffy@acme.org", "hunter42");
         let ret = signup_handler(State(state), Json(input))
             .await?
             .into_response();
@@ -70,7 +70,7 @@ mod tests {
         let config = AppConfig::load()?;
         let (_tdb, state) = AppState::new_for_test(config).await?;
 
-        let input = CreateUser::new("Monkey D. Luffy", "luffy@acme.org", "hunter42");
+        let input = CreateUser::new("none", "Monkey D. Luffy", "luffy@acme.org", "hunter42");
         let _ret = signup_handler(State(state.clone()), Json(input)).await?;
 
         let input = SigninUser::new("luffy@acme.org", "hunter42");

@@ -19,8 +19,8 @@ CREATE TYPE chat_type AS ENUM (
 );
 -- create chat table
 CREATE TABLE IF NOT EXISTS chats (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(128) NOT NULL,
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(64),
     type chat_type NOT NULL,
     -- user id list
     members BIGINT [] NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS chats (
 );
 -- create message table
 CREATE TABLE IF NOT EXISTS messages (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     chat_id BIGINT NOT NULL REFERENCES chats(id),
     sender_id BIGINT NOT NULL REFERENCES users(id),
     content TEXT NOT NULL,
