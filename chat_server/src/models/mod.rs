@@ -1,3 +1,4 @@
+mod chat;
 mod user;
 mod workspace;
 
@@ -49,6 +50,6 @@ pub struct Chat {
     pub ws_id: i64,
     pub name: Option<String>,
     pub r#type: ChatType,
-    pub member: Vec<i64>,
+    pub members: Vec<i64>,
     pub created_at: DateTime<Utc>,
 }
