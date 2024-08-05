@@ -28,6 +28,7 @@ pub struct ServerTimeMiddleware<S> {
     inner: S,
 }
 
+// a server time middleware with tower::Service
 impl<S> Service<Request> for ServerTimeMiddleware<S>
 where
     S: Service<Request, Response = Response> + Send + 'static,

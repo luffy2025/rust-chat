@@ -109,12 +109,7 @@ mod test_util {
             let ek = EncodingKey::load(&config.auth.sk).context("load ek failed")?;
             let post = config.server.db_url.rfind('/').expect("invalid db_url");
             let server_url = &config.server.db_url[..post];
-            let tdb = TestPg::new(
-                server_url.to_string(),
-                std::path::Path::new("../migrations"),
-            );
-            let pool = tdb.get_pool().await;
-
+            let (tdb, pool) = get_test_pool(Some(server_url)).await;
             let state = Self {
                 inner: Arc::new(AppStateInner {
                     config,

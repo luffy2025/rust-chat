@@ -2,6 +2,7 @@ use super::REQUEST_ID_HEADER;
 use axum::{extract::Request, http::HeaderValue, middleware::Next, response::Response};
 use tracing::warn;
 
+// trace middleware with axum::middleware::from_fn
 pub async fn set_request_id(mut req: Request, next: Next) -> Response {
     let id = match req.headers().get(REQUEST_ID_HEADER) {
         Some(v) => Some(v.clone()),

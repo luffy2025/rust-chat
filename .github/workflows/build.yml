@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     services:
       postgres:
-        image: postgres:16
+        image: postgres:14.5
         env:
           POSTGRES_PASSWORD: postgres
         ports:
