@@ -1,12 +1,25 @@
-### signup user
+### signup user1
 POST http://localhost:6688/api/signup
 Content-Type: application/json
 
 {
+    "workspace": "onepiece",
     "fullname": "luffy",
     "email": "luffy@acme.org",
     "password": "hunter42"
 }
+
+### signup user2
+POST http://localhost:6688/api/signup
+Content-Type: application/json
+
+{
+    "workspace": "onepiece",
+    "fullname": "zoro",
+    "email": "zoro@acme.org",
+    "password": "hunter42"
+}
+
 
 ### signin user (valid)
 
@@ -32,4 +45,8 @@ Content-Type: application/json
 
 ### chat api
 GET http://localhost:6688/api/chat
+Authorization: Bearer {{token}}
+
+### get user list
+GET http://localhost:6688/api/users
 Authorization: Bearer {{token}}
