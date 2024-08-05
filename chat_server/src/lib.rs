@@ -102,10 +102,7 @@ mod test_util {
     use sqlx_db_tester::TestPg;
 
     impl AppState {
-        #[cfg(test)]
-        pub async fn new_for_test(
-            config: AppConfig,
-        ) -> Result<(sqlx_db_tester::TestPg, Self), AppError> {
+        pub async fn new_for_test(config: AppConfig) -> Result<(TestPg, Self), AppError> {
             let dk = DecodingKey::load(&config.auth.pk).context("load pk failed")?;
             let ek = EncodingKey::load(&config.auth.sk).context("load ek failed")?;
             let post = config.server.db_url.rfind('/').expect("invalid db_url");
@@ -128,6 +125,7 @@ mod test_util {
         let tdb = TestPg::new(url.to_string(), std::path::Path::new("../migrations"));
         let pool = tdb.get_pool().await;
 
+        // run prepared sql to insert test dat
         let sql = include_str!("../fixtures/test.sql").split(';');
         let mut ts = pool.begin().await.expect("begin transaction failed");
         for s in sql {
