@@ -61,5 +61,21 @@ Content-Type: application/json
 }
 
 ### get chat by id
-GET http://localhost:6688/api/chats/1
+GET http://localhost:6688/api/chats/5
 Authorization: Bearer {{token}}
+
+### update chat
+PATCH  http://localhost:6688/api/chats/5
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "learning rust",
+    "members": [1, 2],
+    "public": true
+}
+
+### update chat
+DELETE  http://localhost:6688/api/chats/5
+Authorization: Bearer {{token}}
+Content-Type: application/json

@@ -34,6 +34,8 @@ VALUES (
         'user5',
         '$argon2id$v=19$m=19456,t=2,p=1$uSA/eb4JlZTu5o0OOP7axw$aEDst9wVRgHtPaqRySrpuBFuNHK2ncwTl7W7O4dEJ/c'
     );
+-- update workspace owner_id
+UPDATE workspaces SET owner_id=1 WHERE id=1;
 -- insert 4 chats
 -- insert public/private channel
 INSERT INTO chats (ws_id, name, type, members)

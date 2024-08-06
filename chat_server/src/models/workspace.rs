@@ -51,7 +51,7 @@ impl Workspace {
     }
 
     #[allow(unused)]
-    pub async fn find_by_id(id: u64, pool: &PgPool) -> Result<Option<Self>, AppError> {
+    pub async fn find_by_id(id: i64, pool: &PgPool) -> Result<Option<Self>, AppError> {
         let ws = sqlx::query_as(
             r#"
             SELECT id, name, owner_id, created_at
@@ -59,14 +59,13 @@ impl Workspace {
             WHERE id = $1
         "#,
         )
-        .bind(id as i64)
+        .bind(id)
         .fetch_optional(pool)
         .await?;
 
         Ok(ws)
     }
 
-    #[allow(unused)]
     pub async fn fetch_all_chat_users(id: u64, pool: &PgPool) -> Result<Vec<ChatUser>, AppError> {
         let users = sqlx::query_as(
             r#"

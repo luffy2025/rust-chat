@@ -18,6 +18,12 @@ pub enum AppError {
     #[error("create chat error: {0}")]
     CreateChatError(String),
 
+    #[error("update chat error: {0}")]
+    UpdateChatError(String),
+
+    #[error("delete chat error: {0}")]
+    DeleteChatError(String),
+
     #[error("sql error: {0}")]
     SqlxError(#[from] sqlx::Error),
 
@@ -48,6 +54,8 @@ impl IntoResponse for AppError {
             AppError::HttpHeaderError(_) => StatusCode::UNPROCESSABLE_ENTITY,
             AppError::JWTError(_) => StatusCode::FORBIDDEN,
             AppError::CreateChatError(_) => StatusCode::BAD_REQUEST,
+            AppError::UpdateChatError(_) => StatusCode::BAD_REQUEST,
+            AppError::DeleteChatError(_) => StatusCode::BAD_REQUEST,
         };
 
         (status, Json(ErrorOutput::new(self.to_string()))).into_response()
