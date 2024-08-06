@@ -105,9 +105,8 @@ mod test_util {
         pub async fn new_for_test(config: AppConfig) -> Result<(TestPg, Self), AppError> {
             let dk = DecodingKey::load(&config.auth.pk).context("load pk failed")?;
             let ek = EncodingKey::load(&config.auth.sk).context("load ek failed")?;
-            // let post = config.server.db_url.rfind('/').expect("invalid db_url");
-            // let server_url = &config.server.db_url[..post];
-            let server_url = "postgres://postgres:postgres@localhost:5432";
+            let post = config.server.db_url.rfind('/').expect("invalid db_url");
+            let server_url = &config.server.db_url[..post];
             let (tdb, pool) = get_test_pool(Some(server_url)).await;
             let state = Self {
                 inner: Arc::new(AppStateInner {
