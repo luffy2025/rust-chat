@@ -107,9 +107,8 @@ mod test_util {
             let ek = EncodingKey::load(&config.auth.sk).context("load ek failed")?;
             // let post = config.server.db_url.rfind('/').expect("invalid db_url");
             // let server_url = &config.server.db_url[..post];
-            // let server_url = "postgres://postgres:postgres@localhost:5432";
-            // let (tdb, pool) = get_test_pool(Some(server_url)).await;
-            let (tdb, pool) = get_test_pool(None).await;
+            let server_url = "postgres://postgres:postgres@localhost:5432";
+            let (tdb, pool) = get_test_pool(Some(server_url)).await;
             let state = Self {
                 inner: Arc::new(AppStateInner {
                     config,
